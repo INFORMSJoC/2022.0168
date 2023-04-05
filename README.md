@@ -33,6 +33,21 @@ Below is the BibTex for citing this snapshot of the respoitory.
 }  
 ```
 
+## Content
+
+This repository includes
+
+1. Sample instance data for the facility location problem.
+2. Source files containing Matlab scripts of the cutting-plane method.
+3. Files containing sample results for instances of the facility location problem.
+
+<!--1. Files describing the data formats and results.-->
+
+### Data files
+
+The instance settings are described in the [manuscript](https://doi.org/10.1287/ijoc.2022.0168) (including parameter choices and procedures to generate random variables). In the folder [data](data), we provide sample data files of one instance, including [random demand](data/ksi_in-sample.csv) $\xi$, and objective coefficients of the random demand ([leader's coefficient](data/C.csv) $C$ and [follower's coefficient](data/V.csv) $V$).
+
+
 ## Description
 
 The goal of this software is to demonstrate the effect of cache optimization.
