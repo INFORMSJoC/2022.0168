@@ -47,71 +47,19 @@ This repository includes
 
 The instance settings are described in the [manuscript](https://doi.org/10.1287/ijoc.2022.0168) (including parameter choices and procedures to generate random variables). In the folder [data](data), we provide sample data files of one instance, including [random demand](data/ksi_in-sample.csv) $\xi$, and objective coefficients of the random demand ([leader's coefficient](data/C.csv) $C$ and [follower's coefficient](data/V.csv) $V$).
 
+### Source files
+There are three files.
 
-## Description
+1. [GenResults_InSample.m](src/GenResults_InSample.m): it takes four inputs -- the number of locations $d$, the set of potential locations for building stores $s$, the set of stores operated by Company A $t$, and the maximum number of stores Company B can operate $r$. This function runs the cutting-plane algorithm by calling functions from the two files listed below.
+2. [BDmaster_LDRsUB_SDPbyS_lemma.m](src/BDmaster_LDRsUB_SDPbyS_lemma.m): it solves the relaxed problem.
+3. [BDsubprob_LDRsUB_SDPbyS_lemma.m](src/BDsubprob_LDRsUB_SDPbyS_lemma.m): it solves the subproblem.
 
-The goal of this software is to demonstrate the effect of cache optimization.
+### Results
 
-## Building
+The results directory contains a sample result file and files with parameter settings obtained by running [GenResults_InSample.m](src/GenResults_InSample.m). 
+1. [C_Veq0_gamma1_mat.csv](results/C_Veq0_gamma1_mat.csv): the values of $\gamma_1$ in the moment-based ambiguity set.
+2. [C_Veq0_gamma2_mat.csv](results/C_Veq0_gamma2_mat.csv): the values of $\gamma_2$ in the moment-based ambiguity set.
+3. [C_Veq0_insamp_obj.csv](results/C_Veq0_insamp_obj.csv): the objective values of the DRBP using the $\gamma$-values in the two files above.
 
-In Linux, to build the version that multiplies all elements of a vector by a
-constant (used to obtain the results in [Figure 1](results/mult-test.png) in the
-paper), stepping K elements at a time, execute the following commands.
 
-```
-make mult
-```
 
-Alternatively, to build the version that sums the elements of a vector (used
-to obtain the results [Figure 2](results/sum-test.png) in the paper), stepping K
-elements at a time, do the following.
-
-```
-make clean
-make sum
-```
-
-Be sure to make clean before building a different version of the code.
-
-## Results
-
-Figure 1 in the paper shows the results of the multiplication test with different
-values of K using `gcc` 7.5 on an Ubuntu Linux box.
-
-![Figure 1](results/mult-test.png)
-
-Figure 2 in the paper shows the results of the sum test with different
-values of K using `gcc` 7.5 on an Ubuntu Linux box.
-
-![Figure 1](results/sum-test.png)
-
-## Replicating
-
-To replicate the results in [Figure 1](results/mult-test), do either
-
-```
-make mult-test
-```
-or
-```
-python test.py mult
-```
-To replicate the results in [Figure 2](results/sum-test), do either
-
-```
-make sum-test
-```
-or
-```
-python test.py sum
-```
-
-## Ongoing Development
-
-This code is being developed on an on-going basis at the author's
-[Github site](https://github.com/tkralphs/JoCTemplate).
-
-## Support
-
-For support in using this software, submit an
-[issue](https://github.com/tkralphs/JoCTemplate/issues/new).
