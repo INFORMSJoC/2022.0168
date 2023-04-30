@@ -29,7 +29,7 @@ Below is the BibTex for citing this snapshot of the respoitory.
   title =         {{Decision Rule Approaches for Pessimistic Bilevel Linear Programs under Moment Ambiguity with Facility Location Applications}},
   year =          {2023},
   doi =           {10.1287/ijoc.2019.2022.0168.cd},
-  url =           {https://github.com/INFORMSJoC/2022.0168},
+  note =          {Available for download at https://github.com/INFORMSJoC/2022.0168},
 }  
 ```
 
