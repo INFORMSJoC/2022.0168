@@ -1,106 +1,65 @@
 [![INFORMS Journal on Computing Logo](https://INFORMSJoC.github.io/logos/INFORMS_Journal_on_Computing_Header.jpg)](https://pubsonline.informs.org/journal/ijoc)
 
-# CacheTest
+# Distributionally Robust Bilevel Programming
 
 This archive is distributed in association with the [INFORMS Journal on
-Computing](https://pubsonline.informs.org/journal/ijoc) under the [MIT License](LICENSE).
+Computing](https://pubsonline.informs.org/journal/ijoc) under the [GNU GPLv3](LICENSE).
 
 The software and data in this repository are a snapshot of the software and data
 that were used in the research reported on in the paper 
-[This is a Template](https://doi.org/10.1287/ijoc.2019.0000) by T. Ralphs. 
+[Decision Rule Approaches for Pessimistic Bilevel Linear Programs under Moment Ambiguity with Facility Location Applications](https://doi.org/10.1287/ijoc.2022.0168) by A. Goyal, Y. Zhang, and C. He. 
 The snapshot is based on 
 [this SHA](https://github.com/tkralphs/JoCTemplate/commit/f7f30c63adbcb0811e5a133e1def696b74f3ba15) 
 in the development repository. 
-
-**Important: This code is being developed on an on-going basis at 
-https://github.com/tkralphs/JoCTemplate. Please go there if you would like to
-get a more recent version or would like support**
 
 ## Cite
 
 To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
 
-https://doi.org/10.1287/ijoc.2019.0000
+https://doi.org/10.1287/ijoc.2022.0168
 
-https://doi.org/10.1287/ijoc.2019.0000.cd
+https://doi.org/10.1287/ijoc.2022.0168.cd
 
 Below is the BibTex for citing this snapshot of the respoitory.
 
 ```
-@article{CacheTest,
-  author =        {T. Ralphs},
+@article{Goyal2023decision,
+  author =        {Goyal, Akshit and Zhang, Yiling and He, Chuan},
   publisher =     {INFORMS Journal on Computing},
-  title =         {{CacheTest}},
-  year =          {2020},
-  doi =           {10.1287/ijoc.2019.0000.cd},
-  url =           {https://github.com/INFORMSJoC/2019.0000},
+  title =         {{Decision Rule Approaches for Pessimistic Bilevel Linear Programs under Moment Ambiguity with Facility Location Applications}},
+  year =          {2023},
+  doi =           {10.1287/ijoc.2019.2022.0168.cd},
+  url =           {https://github.com/INFORMSJoC/2022.0168},
 }  
 ```
 
-## Description
+## Content
 
-The goal of this software is to demonstrate the effect of cache optimization.
+This repository includes
 
-## Building
+1. Sample instance data for the facility location problem.
+2. Source files containing Matlab scripts of the cutting-plane method.
+3. Files containing sample results for instances of the facility location problem.
 
-In Linux, to build the version that multiplies all elements of a vector by a
-constant (used to obtain the results in [Figure 1](results/mult-test.png) in the
-paper), stepping K elements at a time, execute the following commands.
+<!--1. Files describing the data formats and results.-->
 
-```
-make mult
-```
+### Data files
 
-Alternatively, to build the version that sums the elements of a vector (used
-to obtain the results [Figure 2](results/sum-test.png) in the paper), stepping K
-elements at a time, do the following.
+The instance settings are described in the [manuscript](https://doi.org/10.1287/ijoc.2022.0168) (including parameter choices and procedures to generate random variables). In the folder [data](data), we provide sample data files of one instance, including [random demand](data/ksi_in-sample.csv) $\xi$, and objective coefficients of the random demand ([leader's coefficient](data/C.csv) $C$ and [follower's coefficient](data/V.csv) $V$).
 
-```
-make clean
-make sum
-```
+### Source files
+There are three files.
 
-Be sure to make clean before building a different version of the code.
+1. [GenResults_InSample.m](src/GenResults_InSample.m): it takes four inputs -- the number of locations $d$, the set of potential locations for building stores $s$, the set of stores operated by Company A $t$, and the maximum number of stores Company B can operate $r$. This function runs the cutting-plane algorithm by calling functions from the two files listed below.
+2. [BDmaster_LDRsUB_SDPbyS_lemma.m](src/BDmaster_LDRsUB_SDPbyS_lemma.m): it solves the relaxed problem.
+3. [BDsubprob_LDRsUB_SDPbyS_lemma.m](src/BDsubprob_LDRsUB_SDPbyS_lemma.m): it solves the subproblem.
 
-## Results
+### Results
 
-Figure 1 in the paper shows the results of the multiplication test with different
-values of K using `gcc` 7.5 on an Ubuntu Linux box.
+The results directory contains a sample result file and files with parameter settings obtained by running [GenResults_InSample.m](src/GenResults_InSample.m). 
+1. [C_Veq0_gamma1_mat.csv](results/C_Veq0_gamma1_mat.csv): the values of $\gamma_1$ in the moment-based ambiguity set.
+2. [C_Veq0_gamma2_mat.csv](results/C_Veq0_gamma2_mat.csv): the values of $\gamma_2$ in the moment-based ambiguity set.
+3. [C_Veq0_insamp_obj.csv](results/C_Veq0_insamp_obj.csv): the objective values of the DRBP using the $\gamma$-values in the two files above.
 
-![Figure 1](results/mult-test.png)
 
-Figure 2 in the paper shows the results of the sum test with different
-values of K using `gcc` 7.5 on an Ubuntu Linux box.
 
-![Figure 1](results/sum-test.png)
-
-## Replicating
-
-To replicate the results in [Figure 1](results/mult-test), do either
-
-```
-make mult-test
-```
-or
-```
-python test.py mult
-```
-To replicate the results in [Figure 2](results/sum-test), do either
-
-```
-make sum-test
-```
-or
-```
-python test.py sum
-```
-
-## Ongoing Development
-
-This code is being developed on an on-going basis at the author's
-[Github site](https://github.com/tkralphs/JoCTemplate).
-
-## Support
-
-For support in using this software, submit an
-[issue](https://github.com/tkralphs/JoCTemplate/issues/new).
